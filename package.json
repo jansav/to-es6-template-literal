@@ -13,7 +13,7 @@
   "activationEvents": [
     "onCommand:templatize-string.fetch"
   ],
-  "main": "./main",
+  "main": "./src/index",
   "contributes": {
     "commands": [
       {
