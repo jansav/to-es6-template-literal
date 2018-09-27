@@ -3,7 +3,8 @@
     "browser": false,
     "commonjs": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "parserOptions": {
     "ecmaFeatures": {
@@ -11,6 +12,7 @@
     },
     "sourceType": "module"
   },
+  "plugins": ["jest"],
   "rules": {
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
