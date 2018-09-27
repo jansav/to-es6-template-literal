@@ -11,13 +11,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:templatize-string.fetch"
+    "onCommand:templatize-string.format"
   ],
-  "main": "./src/index",
+  "main": "src/index",
   "contributes": {
     "commands": [
       {
-        "command": "templatize-string.fetch",
+        "command": "templatize-string.format",
         "title": "Turn concatenated string to ES6 string template"
       }
     ]
