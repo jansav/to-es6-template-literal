@@ -1,16 +1,27 @@
 const vscode = require('../vscode');
+const templatizeString = require('templatize-string');
 
 module.exports = () => {
   const { activeTextEditor } = vscode.window;
 
   if (!activeTextEditor) return null;
 
-  const { language: currentDocumentLanguage } = activeTextEditor.document;
+  const { languageId: currentDocumentLanguage } = activeTextEditor.document;
 
-  const currentDocumentIsNotJavascript =
-    currentDocumentLanguage !== 'javascript';
+  const currentDocumentIsJavascript = currentDocumentLanguage === 'javascript';
 
-  if (currentDocumentIsNotJavascript) return null;
+  if (!currentDocumentIsJavascript) return null;
 
-  return 'active selection';
+  const {
+    start: selectionStart,
+    end: selectionEnd
+  } = activeTextEditor.selection;
+
+  const selectedText = activeTextEditor.document.getText(
+    new vscode.Range(selectionStart, selectionEnd)
+  );
+
+  const templatizedString = templatizeString(selectedText);
+
+  return templatizedString.output;
 };
