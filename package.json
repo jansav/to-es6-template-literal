@@ -1,0 +1,39 @@
+{
+  "name": "templatize-string",
+  "displayName": "templatize-string",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "jansav",
+  "engines": {
+    "vscode": "^1.27.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:templatize-string.fetch"
+  ],
+  "main": "./main",
+  "contributes": {
+    "commands": [
+      {
+        "command": "templatize-string.fetch",
+        "title": "Turn concatenated string to ES6 string template"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "templatize-string": "^1.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.21",
+    "eslint": "^4.11.0",
+    "@types/node": "^8.10.25",
+    "@types/mocha": "^2.2.42"
+  }
+}
