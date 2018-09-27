@@ -1,1 +1,1 @@
-module.exports = { vscode: require('vscode') };
+module.exports = require('vscode');
