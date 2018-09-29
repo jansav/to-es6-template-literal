@@ -9,6 +9,4 @@ module.exports = () => {
   const templateText = convertStringToTemplateString(selectedText);
 
   ide.replaceSelection('`' + templateText + '`');
-
-  return templateText;
 };

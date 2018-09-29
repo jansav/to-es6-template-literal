@@ -24,12 +24,10 @@ describe('formatInput', () => {
   });
 
   describe('given current document language is supported, when formatting', () => {
-    let actual;
-
     beforeEach(() => {
       ideToolsStub.currentDocumentLanguageIsSupported.mockReturnValue(true);
 
-      actual = formatInput();
+      formatInput();
     });
 
     it('asks current document language', () => {
@@ -52,10 +50,6 @@ describe('formatInput', () => {
       expect(ideToolsStub.replaceSelection).toHaveBeenCalledWith(
         '`some-template-text`'
       );
-    });
-
-    it('returns the template text', () => {
-      expect(actual).toBe('some-template-text');
     });
   });
 
