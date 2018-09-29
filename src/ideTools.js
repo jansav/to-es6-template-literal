@@ -1,4 +1,5 @@
 const vscode = require('./vscode');
+const replaceSelectionInEditorWith = require('./replaceSelectionInEditorWith');
 
 const ideTools = {
   _getActiveTextEditor: function() {
@@ -28,6 +29,17 @@ const ideTools = {
     return activeTextEditor.document.getText(
       new vscode.Range(selectionStart, selectionEnd)
     );
+  },
+
+  replaceSelection: function(value) {
+    const activeTextEditor = this._getActiveTextEditor();
+
+    const replaceSelectionInEditor = replaceSelectionInEditorWith({
+      selection: activeTextEditor.selection,
+      value
+    });
+
+    activeTextEditor.edit(replaceSelectionInEditor);
   }
 };
 
