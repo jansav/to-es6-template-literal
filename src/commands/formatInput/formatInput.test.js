@@ -1,12 +1,12 @@
 describe('formatInput', () => {
   let formatInput;
   let convertStringToTemplateStringMock;
-  let ideToolsStub;
+  let ideStub;
 
   beforeEach(() => {
     convertStringToTemplateStringMock = jest.fn(() => 'some-template-text');
 
-    ideToolsStub = {
+    ideStub = {
       currentDocumentLanguageIsSupported: jest.fn(),
       getSelectedText: jest.fn(() => 'some-selected-text'),
       replaceSelection: jest.fn()
@@ -14,7 +14,7 @@ describe('formatInput', () => {
 
     jest
       .resetModules()
-      .doMock('../../ide/vscode', () => ideToolsStub)
+      .doMock('../../ide/vscode', () => ideStub)
       .doMock(
         '../../doings/convertStringToTemplateString/convertStringToTemplateString',
         () => convertStringToTemplateStringMock
@@ -25,19 +25,17 @@ describe('formatInput', () => {
 
   describe('given current document language is supported, when formatting', () => {
     beforeEach(() => {
-      ideToolsStub.currentDocumentLanguageIsSupported.mockReturnValue(true);
+      ideStub.currentDocumentLanguageIsSupported.mockReturnValue(true);
 
       formatInput();
     });
 
     it('asks current document language', () => {
-      expect(
-        ideToolsStub.currentDocumentLanguageIsSupported
-      ).toHaveBeenCalled();
+      expect(ideStub.currentDocumentLanguageIsSupported).toHaveBeenCalled();
     });
 
     it('asks the selected text', () => {
-      expect(ideToolsStub.getSelectedText).toHaveBeenCalled();
+      expect(ideStub.getSelectedText).toHaveBeenCalled();
     });
 
     it('templatizes the selected text', () => {
@@ -47,7 +45,7 @@ describe('formatInput', () => {
     });
 
     it('replaces the selection with template text', () => {
-      expect(ideToolsStub.replaceSelection).toHaveBeenCalledWith(
+      expect(ideStub.replaceSelection).toHaveBeenCalledWith(
         '`some-template-text`'
       );
     });
@@ -57,13 +55,13 @@ describe('formatInput', () => {
     let actual;
 
     beforeEach(() => {
-      ideToolsStub.currentDocumentLanguageIsSupported.mockReturnValue(false);
+      ideStub.currentDocumentLanguageIsSupported.mockReturnValue(false);
 
       actual = formatInput();
     });
 
     it('does not ask for selected text', () => {
-      expect(ideToolsStub.getSelectedText).not.toHaveBeenCalled();
+      expect(ideStub.getSelectedText).not.toHaveBeenCalled();
     });
 
     it('returns undefined', () => {
