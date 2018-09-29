@@ -8,7 +8,8 @@ describe('formatInput', () => {
 
     ideToolsStub = {
       currentDocumentLanguageIsSupported: jest.fn(),
-      getSelectedText: jest.fn(() => 'some-selected-text')
+      getSelectedText: jest.fn(() => 'some-selected-text'),
+      replaceSelection: jest.fn()
     };
 
     jest
@@ -44,6 +45,12 @@ describe('formatInput', () => {
     it('templatizes the selected text', () => {
       expect(convertStringToTemplateStringMock).toHaveBeenCalledWith(
         'some-selected-text'
+      );
+    });
+
+    it('replaces the selection with template text', () => {
+      expect(ideToolsStub.replaceSelection).toHaveBeenCalledWith(
+        'some-template-text'
       );
     });
 

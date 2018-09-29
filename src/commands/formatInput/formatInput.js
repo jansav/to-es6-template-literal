@@ -6,5 +6,9 @@ module.exports = () => {
 
   const selectedText = ideTools.getSelectedText();
 
-  return convertStringToTemplateString(selectedText);
+  const templateText = convertStringToTemplateString(selectedText);
+
+  ideTools.replaceSelection(templateText);
+
+  return templateText;
 };
