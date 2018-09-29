@@ -1,23 +1,23 @@
 describe('index', () => {
   let activate;
   let deactivate;
+  let registerCommandToMock;
   let registerCommandMock;
   let formatInputStub;
-  let registeredCommandStub;
   let contextStub;
 
   beforeEach(() => {
     formatInputStub = () => {};
-    registeredCommandStub = () => {};
-    registerCommandMock = jest.fn(() => registeredCommandStub);
+    registerCommandMock = jest.fn();
+    registerCommandToMock = jest.fn(() => registerCommandMock);
     contextStub = { subscriptions: { push: jest.fn() } };
 
     jest
       .resetModules()
-      .doMock('./ide/vscode/vscode', () => ({
-        commands: { registerCommand: registerCommandMock }
-      }))
-      .doMock('./commands/formatInput/formatInput', () => formatInputStub);
+      .doMock('./commands/formatInput/formatInput', () => formatInputStub)
+      .doMock('./ide/vscode', () => ({
+        registerCommandTo: registerCommandToMock
+      }));
 
     const index = require('./index');
 
@@ -34,17 +34,15 @@ describe('index', () => {
       activate(contextStub);
     });
 
-    it('creates the command', () => {
-      expect(registerCommandMock).toHaveBeenCalledWith(
-        'templatize-string.format',
-        formatInputStub
-      );
+    it('creates the register command factory', () => {
+      expect(registerCommandToMock).toHaveBeenCalledWith(contextStub);
     });
 
-    it("subscribes the command to VSCode's context", () => {
-      expect(contextStub.subscriptions.push).toHaveBeenCalledWith(
-        registeredCommandStub
-      );
+    it('registers the command by using the factory', () => {
+      expect(registerCommandMock).toHaveBeenCalledWith({
+        name: 'templatize-string.format',
+        command: formatInputStub
+      });
     });
   });
 });

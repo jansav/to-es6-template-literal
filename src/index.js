@@ -1,14 +1,11 @@
-const vscode = require('./ide/vscode/vscode');
 const formatInput = require('./commands/formatInput/formatInput');
+const ide = require('./ide/vscode');
 
 module.exports = {
   activate: context => {
-    const registeredCommand = vscode.commands.registerCommand(
-      'templatize-string.format',
-      formatInput
-    );
+    const registerCommand = ide.registerCommandTo(context);
 
-    context.subscriptions.push(registeredCommand);
+    registerCommand({ name: 'templatize-string.format', command: formatInput });
   },
 
   deactivate: () => {}
