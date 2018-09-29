@@ -20,6 +20,14 @@
         "command": "templatize-string.format",
         "title": "Turn concatenated string to ES6 string template"
       }
+    ],
+    "keybindings": [
+      {
+        "command": "templatize-string.format",
+        "key": "ctrl+k",
+        "mac": "cmd+k",
+        "when": "editorTextFocus"
+      }
     ]
   },
   "scripts": {
