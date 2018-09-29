@@ -1,4 +1,4 @@
-const ideTools = require('./ideTools');
+const ideTools = require('../ideTools');
 const templatizeString = require('templatize-string');
 
 module.exports = () => {

@@ -1,5 +1,5 @@
 const vscode = require('./vscode');
-const formatInput = require('./commands/formatInput');
+const formatInput = require('./commands/formatInput/formatInput');
 
 module.exports = {
   activate: context => {

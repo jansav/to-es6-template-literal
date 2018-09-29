@@ -25,7 +25,7 @@ describe('formatInput', () => {
 
     jest
       .resetModules()
-      .doMock('../vscode', () => vscodeStub)
+      .doMock('../../vscode', () => vscodeStub)
       .doMock('templatize-string', () => templatizeStringMock);
 
     formatInput = require('./formatInput');

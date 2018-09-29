@@ -17,7 +17,7 @@ describe('index', () => {
       .doMock('./vscode', () => ({
         commands: { registerCommand: registerCommandMock }
       }))
-      .doMock('./commands/formatInput', () => formatInputStub);
+      .doMock('./commands/formatInput/formatInput', () => formatInputStub);
 
     const index = require('./index');
 
