@@ -1,6 +1,15 @@
 const vscode = require('../vscode');
 
-module.exports = () => getDocumentLanguage() === 'javascript';
+module.exports = () => {
+  const documentLanguage = getDocumentLanguage();
+
+  return [
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact'
+  ].includes(documentLanguage);
+};
 
 const getDocumentLanguage = () => {
   const activeTextEditor = vscode.window.activeTextEditor;
