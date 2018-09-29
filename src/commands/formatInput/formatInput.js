@@ -1,4 +1,4 @@
-const ideTools = require('../../ideTools');
+const ideTools = require('../../ide/vscode/ideTools');
 const convertStringToTemplateString = require('../../doings/convertStringToTemplateString/convertStringToTemplateString');
 
 module.exports = () => {

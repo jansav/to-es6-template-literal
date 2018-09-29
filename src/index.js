@@ -1,4 +1,4 @@
-const vscode = require('./vscode');
+const vscode = require('./ide/vscode/vscode');
 const formatInput = require('./commands/formatInput/formatInput');
 
 module.exports = {

@@ -14,7 +14,7 @@ describe('formatInput', () => {
 
     jest
       .resetModules()
-      .doMock('../../ideTools', () => ideToolsStub)
+      .doMock('../../ide/vscode/ideTools', () => ideToolsStub)
       .doMock(
         '../../doings/convertStringToTemplateString/convertStringToTemplateString',
         () => convertStringToTemplateStringMock

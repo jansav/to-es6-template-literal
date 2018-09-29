@@ -14,7 +14,7 @@ describe('index', () => {
 
     jest
       .resetModules()
-      .doMock('./vscode', () => ({
+      .doMock('./ide/vscode/vscode', () => ({
         commands: { registerCommand: registerCommandMock }
       }))
       .doMock('./commands/formatInput/formatInput', () => formatInputStub);
