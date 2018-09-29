@@ -1,10 +1,10 @@
 describe('formatInput', () => {
   let formatInput;
-  let templatizeStringMock;
+  let convertStringToTemplateStringMock;
   let ideToolsStub;
 
   beforeEach(() => {
-    templatizeStringMock = jest.fn(() => ({ output: 'some-templatized-text' }));
+    convertStringToTemplateStringMock = jest.fn(() => 'some-template-text');
 
     ideToolsStub = {
       currentDocumentLanguageIsSupported: jest.fn(),
@@ -14,7 +14,10 @@ describe('formatInput', () => {
     jest
       .resetModules()
       .doMock('../../ideTools', () => ideToolsStub)
-      .doMock('templatize-string', () => templatizeStringMock);
+      .doMock(
+        '../../doings/convertStringToTemplateString/convertStringToTemplateString',
+        () => convertStringToTemplateStringMock
+      );
 
     formatInput = require('./formatInput');
   });
@@ -39,11 +42,13 @@ describe('formatInput', () => {
     });
 
     it('templatizes the selected text', () => {
-      expect(templatizeStringMock).toHaveBeenCalledWith('some-selected-text');
+      expect(convertStringToTemplateStringMock).toHaveBeenCalledWith(
+        'some-selected-text'
+      );
     });
 
-    it('returns the templatized text', () => {
-      expect(actual).toBe('some-templatized-text');
+    it('returns the template text', () => {
+      expect(actual).toBe('some-template-text');
     });
   });
 
