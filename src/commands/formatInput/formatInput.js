@@ -1,14 +1,14 @@
-const ideTools = require('../../ide/vscode/ideTools');
+const ide = require('../../ide/vscode');
 const convertStringToTemplateString = require('../../doings/convertStringToTemplateString/convertStringToTemplateString');
 
 module.exports = () => {
-  if (!ideTools.currentDocumentLanguageIsSupported()) return;
+  if (!ide.currentDocumentLanguageIsSupported()) return;
 
-  const selectedText = ideTools.getSelectedText();
+  const selectedText = ide.getSelectedText();
 
   const templateText = convertStringToTemplateString(selectedText);
 
-  ideTools.replaceSelection(templateText);
+  ide.replaceSelection(templateText);
 
   return templateText;
 };

@@ -7,7 +7,7 @@ describe('ideTools', () => {
   beforeEach(() => {
     jest.resetModules().doMock('./vscode', () => () => {});
 
-    ideTools = require('./ideTools');
+    ideTools = require('./index');
     currentDocumentLanguageIsSupported = require('./currentDocumentLanguageIsSupported/currentDocumentLanguageIsSupported');
     getSelectedText = require('./getSelectedText/getSelectedText');
     replaceSelection = require('./replaceSelection/replaceSelection');
