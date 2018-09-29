@@ -18,7 +18,7 @@ describe('replaceSelection', () => {
       .resetModules()
       .doMock('../vscode', () => vscodeStub)
       .doMock(
-        '../replaceSelectionInEditorWith',
+        './replaceSelectionInEditorWith/replaceSelectionInEditorWith',
         () => replaceSelectionInEditorWithStub
       );
 
