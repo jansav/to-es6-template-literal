@@ -17,6 +17,9 @@ const ideTools = {
 
   getSelectedText: function() {
     const activeTextEditor = this._getActiveTextEditor();
+
+    if (!activeTextEditor) return null;
+
     const {
       start: selectionStart,
       end: selectionEnd
