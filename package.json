@@ -18,7 +18,7 @@
     "commands": [
       {
         "command": "to-es6-template-literal.format",
-        "title": "Turn concatenated string to ES6 string template"
+        "title": "Convert text to ES6 template literal"
       }
     ],
     "keybindings": [
