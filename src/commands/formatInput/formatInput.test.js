@@ -1,102 +1,67 @@
-class RangeTestClass {
-  constructor(start, end) {
-    this.start = start;
-    this.end = end;
-  }
-}
-
 describe('formatInput', () => {
-  let vscodeStub;
   let formatInput;
   let templatizeStringMock;
+  let ideToolsStub;
 
   beforeEach(() => {
-    templatizeStringMock = jest.fn(() => ({
-      output: '`some-templatized-text`'
-    }));
+    templatizeStringMock = jest.fn(() => ({ output: 'some-templatized-text' }));
 
-    vscodeStub = {
-      window: {
-        activeTextEditor: null
-      },
-
-      Range: RangeTestClass
+    ideToolsStub = {
+      currentDocumentLanguageIsSupported: jest.fn(),
+      getSelectedText: jest.fn(() => 'some-selected-text')
     };
 
     jest
       .resetModules()
-      .doMock('../../vscode', () => vscodeStub)
+      .doMock('../../ideTools', () => ideToolsStub)
       .doMock('templatize-string', () => templatizeStringMock);
 
     formatInput = require('./formatInput');
   });
 
-  describe('given text editor is open', () => {
-    let getTextMock;
-    let rangeStub;
+  describe('given current document language is supported, when formatting', () => {
+    let actual;
 
     beforeEach(() => {
-      getTextMock = jest.fn(() => 'some-active-text');
+      ideToolsStub.currentDocumentLanguageIsSupported.mockReturnValue(true);
 
-      const selectionStart = {
-        line: 'some-line-number',
-        character: 'some-character'
-      };
-
-      const selectionEnd = {
-        line: 'other-line-number',
-        character: 'other-character'
-      };
-
-      vscodeStub.window.activeTextEditor = {
-        selection: {
-          start: selectionStart,
-          end: selectionEnd
-        },
-        document: {
-          getText: getTextMock
-        }
-      };
-
-      rangeStub = new vscodeStub.Range(selectionStart, selectionEnd);
+      actual = formatInput();
     });
 
-    it('given file language is not javascript, when called, returns null', () => {
-      vscodeStub.window.activeTextEditor.document.languageId = 'not javascript';
-
-      const actual = formatInput();
-
-      expect(actual).toBe(null);
+    it('asks current document language', () => {
+      expect(
+        ideToolsStub.currentDocumentLanguageIsSupported
+      ).toHaveBeenCalled();
     });
 
-    describe('given file language is javascript, when called', () => {
-      let actual;
+    it('asks the selected text', () => {
+      expect(ideToolsStub.getSelectedText).toHaveBeenCalled();
+    });
 
-      beforeEach(() => {
-        vscodeStub.window.activeTextEditor.document.languageId = 'javascript';
+    it('templatizes the selected text', () => {
+      expect(templatizeStringMock).toHaveBeenCalledWith('some-selected-text');
+    });
 
-        actual = formatInput();
-      });
-
-      it('gets text that is selected', () => {
-        expect(getTextMock).toHaveBeenCalledWith(rangeStub);
-      });
-
-      it('turns selected text to ES6 template string', () => {
-        expect(templatizeStringMock).toHaveBeenCalledWith('some-active-text');
-      });
-
-      it('returns the templatized string', () => {
-        expect(actual).toBe('`some-templatized-text`');
-      });
+    it('returns the templatized text', () => {
+      expect(actual).toBe('some-templatized-text');
     });
   });
 
-  it('given text editor is not open, when called, returns null', () => {
-    vscodeStub.window.activeTextEditor = null;
+  describe('given current document language is not supported, when formatting', () => {
+    let actual;
 
-    const actual = formatInput();
+    beforeEach(() => {
+      ideToolsStub.currentDocumentLanguageIsSupported.mockReturnValue(false);
 
-    expect(actual).toBe(null);
+      actual = formatInput();
+    });
+
+    it('does not ask for selected text', () => {
+      expect(ideToolsStub.getSelectedText).not.toHaveBeenCalled();
+    });
+
+    it('returns undefined', () => {
+      expect(actual).toBe(undefined);
+    });
   });
 });
