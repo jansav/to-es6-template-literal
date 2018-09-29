@@ -1,5 +1,5 @@
 const vscode = require('./vscode');
-const replaceSelectionInEditorWith = require('./replaceSelectionInEditorWith');
+const replaceSelection = require('./replaceSelection/replaceSelection');
 
 const currentDocumentLanguageIsSupported = () =>
   getDocumentLanguage() === 'javascript';
@@ -26,17 +26,6 @@ const getSelectedText = () => {
 };
 
 const getActiveTextEditor = () => vscode.window.activeTextEditor || null;
-
-const replaceSelection = value => {
-  const activeTextEditor = getActiveTextEditor();
-
-  const replaceSelectionInEditor = replaceSelectionInEditorWith({
-    selection: activeTextEditor.selection,
-    value
-  });
-
-  activeTextEditor.edit(replaceSelectionInEditor);
-};
 
 module.exports = {
   currentDocumentLanguageIsSupported,
