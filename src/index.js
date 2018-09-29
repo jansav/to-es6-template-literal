@@ -5,7 +5,10 @@ module.exports = {
   activate: context => {
     const registerCommand = ide.registerCommandTo(context);
 
-    registerCommand({ name: 'templatize-string.format', command: formatInput });
+    registerCommand({
+      name: 'to-es6-template-literal.format',
+      command: formatInput
+    });
   },
 
   deactivate: () => {}

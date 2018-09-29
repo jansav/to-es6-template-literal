@@ -1,6 +1,6 @@
 {
-  "name": "templatize-string",
-  "displayName": "templatize-string",
+  "name": "to-es6-template-literal",
+  "displayName": "to-es6-template-literal",
   "description": "",
   "version": "0.0.1",
   "publisher": "jansav",
@@ -11,19 +11,19 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:templatize-string.format"
+    "onCommand:to-es6-template-literal.format"
   ],
   "main": "src/index",
   "contributes": {
     "commands": [
       {
-        "command": "templatize-string.format",
+        "command": "to-es6-template-literal.format",
         "title": "Turn concatenated string to ES6 string template"
       }
     ],
     "keybindings": [
       {
-        "command": "templatize-string.format",
+        "command": "to-es6-template-literal.format",
         "key": "ctrl+k",
         "mac": "cmd+k",
         "when": "editorTextFocus"

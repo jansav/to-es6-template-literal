@@ -40,7 +40,7 @@ describe('index', () => {
 
     it('registers the command by using the factory', () => {
       expect(registerCommandMock).toHaveBeenCalledWith({
-        name: 'templatize-string.format',
+        name: 'to-es6-template-literal.format',
         command: formatInputStub
       });
     });
