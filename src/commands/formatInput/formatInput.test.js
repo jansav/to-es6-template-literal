@@ -50,7 +50,7 @@ describe('formatInput', () => {
 
     it('replaces the selection with template text', () => {
       expect(ideToolsStub.replaceSelection).toHaveBeenCalledWith(
-        'some-template-text'
+        '`some-template-text`'
       );
     });
 
