@@ -3,6 +3,7 @@ describe('ideTools', () => {
   let currentDocumentLanguageIsSupported;
   let getSelectedText;
   let replaceSelection;
+  let registerCommandTo;
 
   beforeEach(() => {
     jest.resetModules().doMock('./vscode', () => () => {});
@@ -11,13 +12,15 @@ describe('ideTools', () => {
     currentDocumentLanguageIsSupported = require('./currentDocumentLanguageIsSupported/currentDocumentLanguageIsSupported');
     getSelectedText = require('./getSelectedText/getSelectedText');
     replaceSelection = require('./replaceSelection/replaceSelection');
+    registerCommandTo = require('./registerCommandTo/registerCommandTo');
   });
 
   it('exports the API', () => {
     expect(ideTools).toEqual({
       currentDocumentLanguageIsSupported,
       getSelectedText,
-      replaceSelection
+      replaceSelection,
+      registerCommandTo
     });
   });
 });
