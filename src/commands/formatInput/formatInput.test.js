@@ -8,7 +8,7 @@ describe('formatInput', () => {
 
     ideStub = {
       currentDocumentLanguageIsSupported: jest.fn(),
-      getSelectedText: jest.fn(() => 'some-selected-text'),
+      getSelectedText: jest.fn(),
       replaceSelection: jest.fn()
     };
 
@@ -23,9 +23,10 @@ describe('formatInput', () => {
     formatInput = require('./formatInput');
   });
 
-  describe('given current document language is supported, when formatting', () => {
+  describe('given current document language is supported and selection exists, when formatting', () => {
     beforeEach(() => {
       ideStub.currentDocumentLanguageIsSupported.mockReturnValue(true);
+      ideStub.getSelectedText.mockReturnValue('some-selected-text');
 
       formatInput();
     });
@@ -51,21 +52,26 @@ describe('formatInput', () => {
     });
   });
 
-  describe('given current document language is not supported, when formatting', () => {
-    let actual;
+  describe('given current document language is supported and selection does not exist, when formatting', () => {
+    beforeEach(() => {
+      ideStub.currentDocumentLanguageIsSupported.mockReturnValue(true);
+      ideStub.getSelectedText.mockReturnValue(null);
+    });
 
+    it('does not templatize selection', () => {
+      expect(convertStringToTemplateStringMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('given current document language is not supported, when formatting', () => {
     beforeEach(() => {
       ideStub.currentDocumentLanguageIsSupported.mockReturnValue(false);
 
-      actual = formatInput();
+      formatInput();
     });
 
     it('does not ask for selected text', () => {
       expect(ideStub.getSelectedText).not.toHaveBeenCalled();
-    });
-
-    it('returns undefined', () => {
-      expect(actual).toBe(undefined);
     });
   });
 });

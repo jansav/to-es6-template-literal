@@ -6,6 +6,8 @@ module.exports = () => {
 
   const selectedText = ide.getSelectedText();
 
+  if (!selectedText) return;
+
   const templateText = convertStringToTemplateString(selectedText);
 
   ide.replaceSelection('`' + templateText + '`');
