@@ -1,9 +1,14 @@
 describe('convertStringToTemplateString', () => {
   let templatizeStringMock;
   let convertStringToTemplateString;
+  let renderWrappedStub;
 
   beforeEach(() => {
-    templatizeStringMock = jest.fn(() => ({ output: 'some-template-string' }));
+    renderWrappedStub = jest.fn(() => '`some-template-string`');
+
+    templatizeStringMock = jest.fn(() => ({
+      renderWrapped: renderWrappedStub
+    }));
 
     jest.resetModules().doMock('templatize-string', () => templatizeStringMock);
 
@@ -22,7 +27,7 @@ describe('convertStringToTemplateString', () => {
     });
 
     it('returns the string that has been turned to template string', () => {
-      expect(actual).toBe('some-template-string');
+      expect(actual).toBe('`some-template-string`');
     });
   });
 });
