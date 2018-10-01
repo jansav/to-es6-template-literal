@@ -1,8 +1,12 @@
 {
   "name": "to-es6-template-literal",
   "displayName": "to-es6-template-literal",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Convert string to ES6 template literal",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jansav/to-es6-template-literal.git"
+  },
   "publisher": "jansav",
   "engines": {
     "vscode": "^1.27.0"
@@ -18,7 +22,7 @@
     "commands": [
       {
         "command": "to-es6-template-literal.format",
-        "title": "Convert text to ES6 template literal"
+        "title": "Convert string to ES6 template literal"
       }
     ],
     "keybindings": [
