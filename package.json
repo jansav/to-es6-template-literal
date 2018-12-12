@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "eslint": "^4.11.0",
-    "eslint-plugin-jest": "^21.22.1",
-    "vscode": "^1.1.21"
+    "eslint-plugin-jest": "^21.27.2",
+    "vscode": "^1.1.26"
   }
 }
