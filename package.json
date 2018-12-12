@@ -2,7 +2,7 @@
   "name": "to-es6-template-literal",
   "displayName": "to-es6-template-literal",
   "description": "Convert string to ES6 template literal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/jansav/to-es6-template-literal.git"
